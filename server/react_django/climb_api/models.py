@@ -8,5 +8,5 @@ class Climb(models.Model):
     rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)]) # 0-5 stars
     
     def __str__(self):
-        return self.common_name
+        return self.name
     
