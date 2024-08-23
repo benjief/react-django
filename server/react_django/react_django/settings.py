@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bird_api',
+    'climb_api',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
