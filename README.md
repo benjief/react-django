@@ -14,4 +14,4 @@ Django Backend: This serves as the API and handles data management.'
 
 # Setup
 1. Install Backend Dependencies: Navigate to the server/react_django directory and install the required packages.
-2. Install Frontend Dependencies: Navigate to the app/ directory and install the required Node.js packages.
+2. Install Frontend Dependencies: Navigate to the app/ directory and install the required Node.js packages.ch

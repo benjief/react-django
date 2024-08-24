@@ -31,7 +31,7 @@ class NumberInputWithValidation extends Component {
           type="number"
           name={this.props.name}
           id={this.props.id}
-          value={this.state.value}
+          value={this.props.value}
           onChange={this.handleChange}
           invalid={this.state.error}
         />
