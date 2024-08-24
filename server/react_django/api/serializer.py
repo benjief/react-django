@@ -27,8 +27,10 @@ class ClimbSerializer(serializers.ModelSerializer):
         fields = '__all__'        
         
     def validate(self, data):
+        instance = self.instance
+        
         # Check if there is another climb with the same name and grade
-        if Climb.objects.filter(name__iexact=data.get('name', '').lower(), grade=data.get('grade')).exists():
+        if Climb.objects.filter(name__iexact=data.get('name', '').lower(), grade=data.get('grade')).exclude(id=instance.id if instance else None).exists():
             raise serializers.ValidationError({
                 "error": "A climb with this name and grade already exists."
             })

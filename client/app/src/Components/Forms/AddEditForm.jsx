@@ -55,6 +55,7 @@ class AddEditForm extends React.Component {
         name: this.state.name,
         grade: this.state.grade,
         length: parseInt(this.state.length, 10),
+        rating: parseInt(this.state.rating, 10),
       });
     }
     fetch(`http://127.0.0.1:8000/api/${dataType}/add/`, {

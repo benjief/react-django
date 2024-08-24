@@ -11,7 +11,7 @@ class NumberInputWithValidation extends Component {
   handleChange = (e) => {
     const value = e.target.value;
     const isValid =
-      value === "" || (Number(value) >= 0 && Number.isInteger(Number(value)));
+      value === "" || (Number(value) > 0 && Number.isInteger(Number(value)));
 
     this.setState({
       value,
@@ -35,7 +35,7 @@ class NumberInputWithValidation extends Component {
           onChange={this.handleChange}
           invalid={this.state.error}
         />
-        <FormFeedback>Please enter a positive whole number.</FormFeedback>
+        <FormFeedback>Please enter a whole number greater than 0.</FormFeedback>
       </FormGroup>
     );
   }
