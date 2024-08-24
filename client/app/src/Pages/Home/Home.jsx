@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <NavBar />
-      <Header>Welcome!</Header>
+      <Header>Hi!</Header>
       <Intro>
         My name is Benjie Friedman. It&apos;s nice to meet you! Please accept my
         application for the position of <b>Junior Software Engineer</b> with
