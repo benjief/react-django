@@ -13,14 +13,11 @@ class BirdSerializer(serializers.ModelSerializer):
         if Bird.objects.filter(common_name__iexact=data.get('common_name', '').lower()).exclude(id=instance.id if instance else None).exists():
             raise serializers.ValidationError({"common_name": "A bird with this common name already exists."})
         
-        # Ensure wing_span is an integer
-        if 'wing_span' in data:
-            wing_span = data.get('wing_span', '')
-            if not isinstance(wing_span, int):
-                raise serializers.ValidationError({"wing_span": "Must be an integer."})
+        # Ensure wingspan is valid (i.e. integer > 0)
+        if data.get('wing_span', '') <= 0:
+            raise serializers.ValidationError('Wingspan must be an integer greater than 0.')
         
         return data
-        
 class ClimbSerializer(serializers.ModelSerializer):
     class Meta:
         model = Climb
@@ -34,5 +31,10 @@ class ClimbSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({
                 "error": "A climb with this name and grade already exists."
             })
+            
+        # Ensure climb length is valid (i.e. integer > 0)
+        if data.get('length', '') <= 0:
+            raise serializers.ValidationError('Length must be an integer greater than 0.')   
+        
         return data
         

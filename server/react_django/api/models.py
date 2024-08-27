@@ -4,7 +4,11 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 class Bird(models.Model):
     common_name = models.CharField(max_length = 50, unique=True)
     scientific_name = models.CharField(max_length = 50)
-    wing_span = models.IntegerField()
+    wing_span = models.IntegerField(
+        validators=[
+            MinValueValidator(1)
+        ]
+    )
     
     # Ensure proper capitalization for common and scientific names
     def save(self, *args, **kwargs):
@@ -24,8 +28,17 @@ class Bird(models.Model):
 class Climb(models.Model):
     name = models.CharField(max_length = 50)
     grade = models.CharField(max_length = 10)
-    length = models.IntegerField()
-    rating = models.IntegerField()
+    length = models.IntegerField(
+        validators=[
+            MinValueValidator(1)
+        ]
+    )
+    rating = models.IntegerField(        
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(5)
+        ]
+    )
     
     # Ensure consistent capitalization for climb names
     def save(self, *args, **kwargs):
