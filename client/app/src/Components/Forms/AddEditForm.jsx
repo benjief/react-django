@@ -21,22 +21,36 @@ class AddEditForm extends React.Component {
 
   isFormValid = () => {
     const { dataType } = this.props;
-    const {
-      common_name,
-      scientific_name,
-      wing_span,
-      name,
-      grade,
-      length,
-      rating,
-    } = this.state;
+    const currentState = this.state;
+
+    let requiredFields = [];
 
     if (dataType === "birds") {
-      return common_name && scientific_name && wing_span;
+      requiredFields = ["common_name", "scientific_name", "wing_span"];
     } else if (dataType === "climbs") {
-      return name && grade && length && rating;
+      requiredFields = ["name", "grade", "length", "rating"];
     }
-    return false;
+
+    // Check if all required fields are filled
+    const allFieldsFilled = requiredFields.every((field) => {
+      return (
+        !!currentState[field] && currentState[field].toString().trim() !== ""
+      );
+    });
+
+    // Check for specific validation
+    const isValidWingSpan =
+      dataType === "birds" ? Number(currentState.wing_span) > 0 : true;
+
+    const isValidLength =
+      dataType === "climbs" ? Number(currentState.length) > 0 : true;
+
+    return (
+      allFieldsFilled &&
+      dataType === "birds" &&
+      isValidWingSpan &&
+      isValidLength
+    );
   };
 
   submitFormAdd = (e) => {
@@ -178,7 +192,9 @@ class AddEditForm extends React.Component {
                 title="Wing Span (cm)"
                 name="wing_span"
                 id="wing_span"
-                onChange={(e) => this.setState({ wing_span: e.target.value })}
+                onChange={(e) => {
+                  this.setState({ wing_span: e.target.value });
+                }}
                 value={this.state.wing_span || ""}
               />
             </FormGroup>

@@ -25,12 +25,7 @@ class Climb(models.Model):
     name = models.CharField(max_length = 50)
     grade = models.CharField(max_length = 10)
     length = models.IntegerField()
-    rating = models.IntegerField(        
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(5)
-        ]
-    )
+    rating = models.IntegerField()
     
     # Ensure consistent capitalization for climb names
     def save(self, *args, **kwargs):
